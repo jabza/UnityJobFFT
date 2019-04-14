@@ -11,8 +11,6 @@ using UnityEngine;
 using Unity.Jobs;
 using Unity.Collections;
 
-using Complex = System.Numerics.Complex;
-
 public class FFTExample : MonoBehaviour
 {
 	public FFT.ESize fftSize = FFT.ESize.N16;
@@ -48,7 +46,7 @@ public class FFTExample : MonoBehaviour
 			job.Complete();
 		}
     
-    		//someComplexData has now been transformed, and may be used.
+    		//someComplexData has now been transformed, and may be used!
 
 		transformJobs.Clear();
 	}
@@ -59,6 +57,7 @@ public class FFTExample : MonoBehaviour
 		}
 
 		transformJobs.Clear();
+		
 		fft.Dispose();
 	}
 }
