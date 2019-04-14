@@ -20,7 +20,7 @@ public class FFTExample : MonoBehaviour
 	private FFT fft;
 	private List<JobHandle> transformJobs = new List<JobHandle>();
   
-  private Complex[] someComplexData;
+  	private Complex[] someComplexData;
 
 	private void Awake() {
 		fft = new FFT(fftSize);
@@ -30,25 +30,25 @@ public class FFTExample : MonoBehaviour
 		if(transformJobs.Count > 0)
 			return;
       
-    //Schedule some FFT jobs with your data. Data is transformed inline.
+    		//Schedule some FFT jobs with your data. Data is transformed inline.
 		transformJobs.Add(fft.ScheduleTransform(ref someComplexData));
 
 		JobHandle.ScheduleBatchedJobs();
 	}
 
 	private void LateUpdate() {
-    //Wait for the jobs to complete.
+    		//Wait for the jobs to complete.
 		foreach(JobHandle job in transformJobs) {
 			if(!job.IsCompleted)
 				return;
 		}
     
-    //Ensure jobs are completed.
+    		//Ensure jobs are completed.
 		foreach(JobHandle job in transformJobs) {
 			job.Complete();
 		}
     
-    //someComplexData has now been transformed, and may be used.
+    		//someComplexData has now been transformed, and may be used.
 
 		transformJobs.Clear();
 	}
