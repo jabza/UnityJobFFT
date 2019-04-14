@@ -16,14 +16,16 @@ public class FFTExample : MonoBehaviour
 	private FFT fft = new FFT(FFT.ESize.N16);
 	private List<JobHandle> transformJobs = new List<JobHandle>();
   
-  	private Complex[] someComplexData;
+  	private Complex[] someComplexData, someComplexData2, someComplexData3;
 
 	private void Update() {
 		if(transformJobs.Count > 0)
 			return;
       
-    		//Schedule some FFT jobs with your data. Data is transformed inline.
+    		//Schedule multiple FFT jobs with your data. Data is transformed inline.
 		transformJobs.Add(fft.ScheduleTransform(ref someComplexData));
+		transformJobs.Add(fft.ScheduleTransform(ref someComplexData2));
+		transformJobs.Add(fft.ScheduleTransform(ref someComplexData3));
 
 		JobHandle.ScheduleBatchedJobs();
 	}
