@@ -13,16 +13,10 @@ using Unity.Collections;
 
 public class FFTExample : MonoBehaviour
 {
-	public FFT.ESize fftSize = FFT.ESize.N16;
-
-	private FFT fft;
+	private FFT fft = new FFT(FFT.ESize.N16);
 	private List<JobHandle> transformJobs = new List<JobHandle>();
   
   	private Complex[] someComplexData;
-
-	private void Awake() {
-		fft = new FFT(fftSize);
-	}
 
 	private void Update() {
 		if(transformJobs.Count > 0)
